@@ -38,12 +38,15 @@ jobs:
         # Login to AWS ECR
         echo ok
         aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+        echo $AWS_ACCESS_KEY_ID
     - name: Build and tag the image
       run: |
         # Build and tag the image
+        echo in2
         docker build \
           -t $CONTAINER_IMAGE \
           -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE ./php-redis
+        echo out2
  
     # Set image tag in kustomization
 
